@@ -13,7 +13,8 @@ function App() {
   const [movies, setMovies] = useState(null);
       
         useEffect( () => {
-          fetch("./movies.json")
+          //fetch("./movies.json")
+          fetch("/movies")
           .then( response => response.json() )
           .then( setMovies )
           .catch(e => console.log(e.message))
