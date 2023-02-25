@@ -1,9 +1,7 @@
 import express from 'express';
-import fs from 'fs';
+//import fs from 'fs';
 import { MongoClient } from 'mongodb';
-//import { fileURLToPath } from 'url';
 const app = express();
-app.use(express.json());
 const port = 8000
 
 
@@ -19,11 +17,26 @@ app.get('/movies', async (req, res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017');
     await client.connect();
 
-    const db = client.db(`moviesDB`)
+    const db = client.db('moviesDB')
 
     const movieData = await db.collection('movies').find({}).toArray();
     console.log(movieData);
     res.json(movieData);
+})
+
+//To show add movie form to add a new movie to the database.
+app.post('/addmovie', async (req, res) => {
+    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    await client.connect();
+
+    const db = client.db('moviesDB');
+
+
+    const insertCommand = await db.collection('movies').insertOne( {'name':req.body.name, 
+    'releaseDate':req.body.releaseDate, 'actors':req.body.actors, 'poster':req.body.poster, 'rating': parseInt(req.body.rating)});
+
+    console.log(insertCommand);
+    res.redirect('/');
 })
 
 
