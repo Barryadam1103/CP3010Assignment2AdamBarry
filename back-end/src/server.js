@@ -1,11 +1,18 @@
 import express from 'express';
 import fs from 'fs';
 import { MongoClient } from 'mongodb';
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
 const app = express();
 const port = 8000;
 
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '../posters')))
+
+const upload = multer({ dest: 'posters/'})
 
 //Test comment
 app.get('/', (req, res) => {
@@ -25,7 +32,7 @@ app.get('/movies', async (req, res) => {
 })
 
 //To show add movie form to add a new movie to the database.
-app.post('/addmovie', async (req, res) => {
+app.post('/addmovie', upload.single('movie_poster'), async (req, res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017');
     await client.connect();
 
@@ -33,7 +40,7 @@ app.post('/addmovie', async (req, res) => {
 
 
     const insertCommand = await db.collection('movies').insertOne( {'name':req.body.name, 
-    'releaseDate':req.body.date, 'actors':req.body.actors, 'poster':req.body.poster, 'rating': req.body.rating});
+    'releaseDate':req.body.date, 'actors':req.body.actors, 'poster':req.file.filename, 'rating': req.body.rating});
 
     console.log(insertCommand);
     res.redirect('/');

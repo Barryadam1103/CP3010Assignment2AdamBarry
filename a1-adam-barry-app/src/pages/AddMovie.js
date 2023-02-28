@@ -7,7 +7,7 @@ const AddMovie = (props) => {
         const moviereleaseDate = useRef();
         const movieActors = useRef();
         const movieRating = useRef();
-        const moviePoster = useRef();
+        //const moviePoster = useRef();
     
     
         /*const submit = (event) => {
@@ -39,7 +39,7 @@ const AddMovie = (props) => {
         return (
             <>
             <Link to="/">Home</Link>
-            <form method="post" action="/addmovie">
+            <form method="post" action="/addmovie" encType="multipart/form-data">
                 
                 <label>Movie Name: <input ref = {movieName}type = "text" name="name" required/></label>
                 <div>
@@ -52,12 +52,7 @@ const AddMovie = (props) => {
                     <label>Movie Rating: <input ref={movieRating} type = "text" name="rating" required/></label>
                 </div>
                 <div>
-                <label>Choose a Movie Poster</label>
-                            <select ref={moviePoster}>
-                                <option value="./Shrek_(2001_animated_feature_film).jpg">Shrek</option>
-                                <option value="./Mightyducksposter.jpg">Mighty Ducks</option>
-                                <option value="./StepbrothersMP08.jpg">Step Brothers</option>
-                            </select>
+                    <input type="file" name="movie_poster"/>
                 </div>
                 <input type="submit" value="Submit" />
 
