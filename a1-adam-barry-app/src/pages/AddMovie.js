@@ -10,7 +10,7 @@ const AddMovie = (props) => {
         const moviePoster = useRef();
     
     
-        const submit = (event) => {
+        /*const submit = (event) => {
             event.preventDefault();
 
             const movieInfo = [];
@@ -35,21 +35,21 @@ const AddMovie = (props) => {
     
     
     
-        }
+        }*/
         return (
             <>
             <Link to="/">Home</Link>
-            <form onSubmit={submit}>
+            <form method="post" action="/addmovie">
                 
-                <label>Movie Name: <input ref = {movieName}type = "text" required/></label>
+                <label>Movie Name: <input ref = {movieName}type = "text" name="name" required/></label>
                 <div>
-                    <label>Movie Release Date: <input ref={moviereleaseDate} type = "text" required/></label>
+                    <label>Movie Release Date: <input ref={moviereleaseDate} type = "text" name="date" required/></label>
                 </div>
                 <div>
-                    <label>Movie Actors: <input ref={movieActors} type = "text" required/></label>
+                    <label>Movie Actors: <input ref={movieActors} type = "text" name="actors" required/></label>
                 </div>
                 <div>
-                    <label>Movie Rating: <input ref={movieRating} type = "text" required/></label>
+                    <label>Movie Rating: <input ref={movieRating} type = "text" name="rating" required/></label>
                 </div>
                 <div>
                 <label>Choose a Movie Poster</label>

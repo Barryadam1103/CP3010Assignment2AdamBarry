@@ -32,7 +32,7 @@ function App() {
         <div id="page-body">
           <Routes>
             <Route path='/' element={<HomePage movie={(movies)} setMovies={(setMovies)} />} />
-            <Route path='addmovie' element={<AddMovie movie={(movies)} setMovies={(setMovies)} />} />            
+            <Route path='/addmovie' element={<AddMovie movie={(movies)} setMovies={(setMovies)} />} />            
           </Routes>
         </div>
       </div>

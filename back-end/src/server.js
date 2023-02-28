@@ -1,8 +1,8 @@
 import express from 'express';
-//import fs from 'fs';
+import fs from 'fs';
 import { MongoClient } from 'mongodb';
 const app = express();
-const port = 8000
+const port = 8000;
 
 
 app.use(express.urlencoded({ extended: false }));
@@ -33,7 +33,7 @@ app.post('/addmovie', async (req, res) => {
 
 
     const insertCommand = await db.collection('movies').insertOne( {'name':req.body.name, 
-    'releaseDate':req.body.releaseDate, 'actors':req.body.actors, 'poster':req.body.poster, 'rating': parseInt(req.body.rating)});
+    'releaseDate':req.body.date, 'actors':req.body.actors, 'poster':req.body.poster, 'rating': req.body.rating});
 
     console.log(insertCommand);
     res.redirect('/');
