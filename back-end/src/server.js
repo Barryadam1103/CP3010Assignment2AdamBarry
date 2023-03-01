@@ -46,6 +46,22 @@ app.post('/addmovie', upload.single('movie_poster'), async (req, res) => {
     res.redirect('/');
 })
 
+//Remove button to remove movie from database.
+app.post('/removeMovie', async (req, res) => {
+    const title = req.body.name;
+    
+    //Connect to Database.
+    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    await client.connect();
+    const db = client.db('moviesDB');
+
+    const result = await db.collection('movies').deleteOne({name: req.body.name});
+
+    //Get status when we go into the console we will get an ok message!
+    res.sendStatus(200);
+
+})
+
 
 app.listen(port, () => {
     console.log(`Example of listening to port ${port}`)
