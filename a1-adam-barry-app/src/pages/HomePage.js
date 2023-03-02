@@ -21,7 +21,7 @@ const removeMovieById = (name, movieList, setMovieList) => {
       };
 
 
-      fetch("/removeMovie", requestOptions)
+      fetch("/api/removeMovie", requestOptions)
       .then(Response => Response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));

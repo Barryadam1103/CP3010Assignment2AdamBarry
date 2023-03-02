@@ -1,6 +1,7 @@
 //import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
 const AddMovie = (props) => {
 
         const movieName = useRef();
@@ -39,18 +40,25 @@ const AddMovie = (props) => {
         return (
             <>
             <Link to="/">Home</Link>
-            <form method="post" action="/addmovie" encType="multipart/form-data">
-                
-                <label>Movie Name: <input ref = {movieName}type = "text" name="name" required/></label>
+            <form method="post" action="/api/addmovie" encType="multipart/form-data">
+                <Form.Group>
+                <Form.Label>Movie Name: <input ref = {movieName}type = "text" name="name" required/></Form.Label>
+                </Form.Group>
+                <Form.Group>
                 <div>
-                    <label>Movie Release Date: <input ref={moviereleaseDate} type = "text" name="date" required/></label>
+                    <Form.Label>Movie Release Date: <input ref={moviereleaseDate} type = "text" name="date" required/></Form.Label>
                 </div>
+                </Form.Group>
+                <Form.Group>
                 <div>
-                    <label>Movie Actors: <input ref={movieActors} type = "text" name="actors" required/></label>
+                    <Form.Label>Movie Actors: <input ref={movieActors} type = "text" name="actors" required/></Form.Label>
                 </div>
+                </Form.Group>
+                <Form.Group>
                 <div>
                     <label>Movie Rating: <input ref={movieRating} type = "text" name="rating" required/></label>
                 </div>
+                </Form.Group>
                 <div>
                     <input type="file" name="movie_poster"/>
                 </div>
